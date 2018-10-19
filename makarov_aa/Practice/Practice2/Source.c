@@ -1,68 +1,28 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <locale.h>
-#define D 10
+int b[10];
 void main() {
-	setlocale(LC_ALL, "Russian");
-	int a[D] = { 0 }; // массив позиций цифр в числе
-	int b[D] = { 0 }; // массив для проверки неповторяемости вводимого пользователем числа
-	int n; //длина числа
-	int g; //рандомируемая цифра
-	int i;//счетчик
-	int check1, check2;//переменные для проверки вводимого числа на длину и неповторяемость
-	int cows, beefs;//быки и коровы
-	long long int k, p, p1;//загаданное и вводимое числа, второстепенное число для обработки
-	printf("Введите длину загадываемого числа \n");
+	const int k = RAND_MAX / 9;
+	int n, a = 0, g, i;
 	do {
 		scanf("%d", &n);
-	} while ((n <= 0) || (n > 10)); // ввод длины числа
-	i = 1;
-	k = 0;
+	} while ((n <= 0) || (n > 10));
 	srand((unsigned int)time(0));
-		g = rand() * 8 / RAND_MAX + 1;//отдельная генерация для первой цифры не равной 0
-		k += g;
-		a[g] += i;
-	while (i < n) { //генерация остальных цифр с занесением их позиций в массив
+	for (i = 0; i < 10; i++)
+		b[i] = i;
+	for (i = 0; i < 10; i++)
+
 		g = rand() * 9 / RAND_MAX;
-		if (a[g] == 0) {
-			k *= 10;
-			k += g;
-			a[g] += i + 1;
-			i++;
+	/*for (i = 0; i < n; i++) {
+		a *= 10;
+		g = rand() * 9 / RAND_MAX;
+		while (b[g] != 1) {
+			g = rand() * 9 / RAND_MAX;
+			b[g]++;
 		}
+		if (b[g] == 1)
+			a += g;
 	}
-	printf("%lld Отгадайте число (цифры в ответе не должны повторяться)\n", k);
-	do {
-		do { //проверка вводимого числа
-			scanf("%lld", &p);
-			p1 = p;
-			for (i = 0; i < D; i++)
-				b[i] = 0;
-			check1 = 0;
-			while (p1 != 0) { //проверка на длину
-				b[p1 % 10]++;
-				p1 /= 10;
-				check1++;
-			}
-			check2 = 0;
-			for (i = 0; i < D; i++) //проверка на неповторяемость
-				if (b[i] > 1)
-					check2++;
-		} while ((check1 != n) || (check2 != 0));
-		i = n;
-		cows = 0;
-		beefs = 0;
-		while (p != 0) {//проверка на количество коров и быков
-			if (a[p % 10] > 0)
-				cows++;
-			if (a[p % 10] == i)
-				beefs++;
-			i--;
-			p /= 10;
-		}
-		printf("%d коров, %d быков\n", cows, beefs);//вывод ответа
-	}
-	while ((cows != n) || (beefs != n));// повторять, пока игрок не отгадает все
-	printf("Поздравляем, вы выиграли!");
+	printf("%d", a);*/
 }
