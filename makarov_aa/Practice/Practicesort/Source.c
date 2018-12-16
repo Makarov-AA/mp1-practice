@@ -101,6 +101,39 @@ void count(int a[], int n)
             z++;
         }
 }
+/*void quicksplit(int a[], int* i, int* j, int p)
+{
+	do {
+		while (a[*i] < p) *i++;
+		while (a[*j] > p) *j--;
+		if (i < j)
+		{
+			int tmp = a[*i];
+			a[*i] = a[*j];
+			a[*j] = tmp;
+		}
+	} while (*i <= *j);
+}
+void quicksort(int a[], int n1, int n2)
+{
+	int pidx = (n1 + n2) / 2;
+	int i = n1, j = n2;
+	qucksplit(a, &i, &j, a[pidx]);
+	if (j > n1) quicksort(a, n1, j);
+	if (i < n2) quicksort(a, i, n2);
+}*/
+void mergesort(int a[], int l, int r)
+{
+	if (l >= r) return;
+	int m = (l + r) / 2;
+	mergesort(a, l, m);
+	mergesort(a, m + 1, r);
+	merge(a, l, m, r);
+}
+void merge(int a[], int l, int m, int r)
+{
+
+}
 void main()
 {
     int a[N];
