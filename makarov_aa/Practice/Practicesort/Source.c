@@ -40,7 +40,6 @@ void inputzero(int* a, int n)
     for (; i < n; i++)
         a[i] = 0;
 }
-
 void output(int* a, int n)
 {
     int i = 0;
