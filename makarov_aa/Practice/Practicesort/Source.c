@@ -154,31 +154,17 @@ void merge(int* a, int* buffer, int l, int m, int r)
 	while (k <= r)
 	{
 		while (i <= m && j <= r)
-		{
 			if (a[i] < a[j])
-			{
-				buffer[k] = a[i];
-				i++; k++;
-			}
+				buffer[k++] = a[i++];
 			else
-			{
 				if (a[j] < a[i] && j <= r)
-				{
-					buffer[k] = a[j];
-					j++; k++;
-				}
+					buffer[k++] = a[j++];
 				else 
-				{
 					if (a[i] == a[j])
 					{
-						buffer[k] = a[j];
-						j++; k++;
-						buffer[k] = a[i];
-						i++; k++;
+						buffer[k++] = a[j++];
+						buffer[k++] = a[i++];
 					}
-				}
-			}
-		}
 		while (i <= m)
 		{
 			buffer[k] = a[i];
