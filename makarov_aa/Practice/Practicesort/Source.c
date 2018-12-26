@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define K 100
+#define K 200
 #define N 10
 
-int check(int a[], int n)
+int check(int* a, int n)
 {
 	int i = 0;
 	for (; i < N - 1; i++)
@@ -14,7 +14,7 @@ int check(int a[], int n)
 	return 0;
 }
 
-void input(int a[], int n)
+void input(int* a, int n)
 {
     int i = 0;
     for (; i < n; i++)
@@ -24,24 +24,24 @@ void input(int a[], int n)
     }
 }
 
-void inputrand(int a[], int n)
+void inputrand(int* a, int n)
 {
     int i = 0;
     srand((unsigned int)time(0));
     for (; i < n; i++)
     {
-        a[i] = (1000 + 1000) * rand() / RAND_MAX - 1000;
+        a[i] = (100 + 100) * rand() / RAND_MAX - 100;
     }
 }
 
-void inputzero(int a[], int n)
+void inputzero(int* a, int n)
 {
     int i = 0;
     for (; i < n; i++)
         a[i] = 0;
 }
 
-void output(int a[], int n)
+void output(int* a, int n)
 {
     int i = 0;
     for (; i < n; i++)
@@ -49,14 +49,14 @@ void output(int a[], int n)
     printf("\n");
 }
 
-void copy(int a[], int b[], int n)
+void copy(int* a, int* b, int n)
 {
     int i = 0;
     for (; i < n; i++)
         b[i] = a[i];
 }
 
-void choose(int a[], int n)
+void choose(int* a, int n)
 {
     int i = 0, j, min, minindx;
     for (; i < n - 1; i++)
@@ -74,7 +74,7 @@ void choose(int a[], int n)
     }
 }
 
-void insert(int a[], int n)
+void insert(int* a, int n)
 {
     int i, j, tmp;
     for (i = 1; i < n; i++)
@@ -90,7 +90,7 @@ void insert(int a[], int n)
     }
 }
 
-void bubble(int a[], int n)
+void bubble(int* a, int n)
 {
     int i = 0, j, tmp;
     for (; i < n; i++)
@@ -104,29 +104,26 @@ void bubble(int a[], int n)
 
 }
 
-void count(int a[], int n)
+void count(int* a, int n)
 {
     int i, j, z = 0;
     int b[K];
     inputzero(b, K);
     for (i = 0; i < n; i++)
-        b[a[i]]++;
+        b[a[i] + 100]++;
     for (i = 0; i < K; i++)
         for (j = 0; j < b[i]; j++)
         {
-            a[z] = i;
+            a[z] = i - 100;
             z++;
         }
 }
 
-void quicksplit(int a[], int* i, int* j, int p)
+void quicksplit(int* a, int* i, int* j, int p)
 {
 	do {
-		while (a[*i] < p) {
-			/*printf("%d i, %d a[i] \n", *i, a[*i]); */(*i)++; /*printf("%d i, %d a[i] \n", *i, a[*i]);*/
-		}
-		while (a[*j] > p) { /*printf("%d j, %d a[j] \n", *j, a[*j]); */(*j)--; /*printf("%d j, %d a[j] \n", *j, a[*j]);*/
-		}
+		while (a[*i] < p) (*i)++;
+		while (a[*j] > p) (*j)--;
 		if (*i <= *j)
 		{
 			int tmp = a[*i];
@@ -134,7 +131,6 @@ void quicksplit(int a[], int* i, int* j, int p)
 			a[*j] = tmp;
 			(*i)++;
 			(*j)--;
-			//printf("yes\n");
 		}
 	} while (*i <= *j);
 }
@@ -144,32 +140,78 @@ void quicksort(int a[], int n1, int n2)
 	if (n1 < n2)
 	{
 		int pidx = (n1 + n2) / 2;
-		//printf("%d a[pidx]\n", a[pidx]);
 		int i = n1, j = n2;
 		quicksplit(a, &i, &j, a[pidx]);
-		//printf("%d i, %d j\n", i, j);
 		quicksort(a, n1, j);
 		quicksort(a, i, n2);
 	}
 }
 
-void mergesort(int a[], int l, int r)
+void merge(int* a, int* buffer, int l, int m, int r)
 {
-	if (l >= r) return;
-	int m = (l + r) / 2;
-	mergesort(a, l, m);
-	mergesort(a, m + 1, r);
-	merge(a, l, m, r);
+	int i, j, k;
+	i = l; j = m + 1; k = l;
+	while (k <= r)
+	{
+		while (i <= m && j <= r)
+		{
+			if (a[i] < a[j])
+			{
+				buffer[k] = a[i];
+				i++; k++;
+			}
+			else
+			{
+				if (a[j] < a[i] && j <= r)
+				{
+					buffer[k] = a[j];
+					j++; k++;
+				}
+				else 
+				{
+					if (a[i] == a[j])
+					{
+						buffer[k] = a[j];
+						j++; k++;
+						buffer[k] = a[i];
+						i++; k++;
+					}
+				}
+			}
+		}
+		while (i <= m)
+		{
+			buffer[k] = a[i];
+			i++; k++;
+		}
+		while (j <= r)
+		{
+			buffer[k] = a[j];
+			j++; k++;
+		}
+		for (i = l; i <= r; i++)
+			a[i] = buffer[i];
+	}
 }
-void merge(int a[], int l, int m, int r)
-{
 
+void mergesort(int* a, int* buffer, int l, int r)
+{
+	if (l >= r) {
+		return;
+	}
+	int m = (l + r) / 2;
+	mergesort(a, buffer, l, m);
+	mergesort(a, buffer, m + 1, r);
+	merge(a, buffer, l, m, r);
 }
 
 void main()
 {
-    int a[N], b[N];
-    inputzero(a, N);
+	int* a, *b, *buffer;
+	a = (int*)malloc(sizeof(int) * (N));
+	b = (int*)malloc(sizeof(int) * (N));
+	buffer = (int*)malloc(sizeof(int) * (N));
+    inputrand(a, N);
 	output(a, N);
 	copy(a, b, N);
     count(b, N);
@@ -187,12 +229,22 @@ void main()
 	printf("%d\n", check(b, N));
     output(b, N);
 	copy(a, b, N);
-    bubble(b, N);
+	bubble(b, N);
 	printf("bubble  ");
 	printf("%d\n", check(b, N));
+	output(b, N);
 	copy(a, b, N);
-	quicksort(a, 0, N-1);
+	quicksort(b, 0, N-1);
 	printf("quicksort ");
 	printf("%d\n", check(b, N));
-    output(a, N);
+    output(b, N);
+	copy(a, b, N);
+	mergesort(a, buffer, 0, N - 1);
+	copy(buffer, b, N);
+	printf("mergesort ");
+	printf("%d\n", check(b, N));
+	output(b, N);
+	free(a);
+	free(b);
+	free(buffer);
 }
