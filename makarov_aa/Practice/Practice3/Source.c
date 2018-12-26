@@ -49,7 +49,7 @@ void main()
             printf("%d\n", p);
             do 
             {
-                scanf("%c", &c);
+                scanf("%*c", &c);
             }
             while ((c != '>') && (c != '<') && (c != '='));
             k++;
