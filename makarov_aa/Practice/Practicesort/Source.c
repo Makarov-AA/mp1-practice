@@ -5,12 +5,21 @@
 #define K 100
 #define N 10
 
+int check(int a[], int n)
+{
+	int i = 0;
+	for (; i < N - 1; i++)
+		if (a[i] > a[i + 1])
+			return 1;
+	return 0;
+}
+
 void input(int a[], int n)
 {
     int i = 0;
     for (; i < n; i++)
     {
-        printf("Input a[%d]", i);
+        printf("Input a[%d]\n", i);
         scanf("%d", &(a[i]));
     }
 }
@@ -113,45 +122,77 @@ void count(int a[], int n)
 void quicksplit(int a[], int* i, int* j, int p)
 {
 	do {
-		while (a[*i] < p) (*i)++;
-		while (a[*j] > p) (*j)--;
-		if (*i < *j)
+		while (a[*i] < p) {
+			/*printf("%d i, %d a[i] \n", *i, a[*i]); */(*i)++; /*printf("%d i, %d a[i] \n", *i, a[*i]);*/
+		}
+		while (a[*j] > p) { /*printf("%d j, %d a[j] \n", *j, a[*j]); */(*j)--; /*printf("%d j, %d a[j] \n", *j, a[*j]);*/
+		}
+		if (*i <= *j)
 		{
 			int tmp = a[*i];
 			a[*i] = a[*j];
 			a[*j] = tmp;
+			(*i)++;
+			(*j)--;
+			//printf("yes\n");
 		}
 	} while (*i <= *j);
 }
 
 void quicksort(int a[], int n1, int n2)
 {
-	int pidx = (n1 + n2) / 2;
-	int i = n1, j = n2;
-	quicksplit(a, &i, &j, a[pidx]);
-	if (j > n1) quicksort(a, n1, j);
-	if (i < n2) quicksort(a, i, n2);
+	if (n1 < n2)
+	{
+		int pidx = (n1 + n2) / 2;
+		//printf("%d a[pidx]\n", a[pidx]);
+		int i = n1, j = n2;
+		quicksplit(a, &i, &j, a[pidx]);
+		//printf("%d i, %d j\n", i, j);
+		quicksort(a, n1, j);
+		quicksort(a, i, n2);
+	}
 }
 
-/*void mergesort(int a[], int l, int r)
+void mergesort(int a[], int l, int r)
 {
 	if (l >= r) return;
 	int m = (l + r) / 2;
 	mergesort(a, l, m);
 	mergesort(a, m + 1, r);
 	merge(a, l, m, r);
-}*/
+}
+void merge(int a[], int l, int m, int r)
+{
+
+}
+
 void main()
 {
-    int a[N];
-    input(a, N);
-   /* count(a, N);
-    output(a, N);
-    choose(a, N); 
-    output(a, N);
-    insert(a, N); 
-    output(a, N); 
-    bubble(a, N);*/
-	quicksort(a, 0, N);
+    int a[N], b[N];
+    inputzero(a, N);
+	output(a, N);
+	copy(a, b, N);
+    count(b, N);
+	printf("count  ");
+	printf("%d\n", check(b, N));
+    output(b, N);
+	copy(a, b, N);
+    choose(b, N); 
+	printf("choose  ");
+	printf("%d\n", check(b, N));
+    output(b, N);
+	copy(a, b, N);
+    insert(b, N); 
+	printf("insert  ");
+	printf("%d\n", check(b, N));
+    output(b, N);
+	copy(a, b, N);
+    bubble(b, N);
+	printf("bubble  ");
+	printf("%d\n", check(b, N));
+	copy(a, b, N);
+	quicksort(a, 0, N-1);
+	printf("quicksort ");
+	printf("%d\n", check(b, N));
     output(a, N);
 }
