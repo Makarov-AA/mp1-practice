@@ -35,7 +35,7 @@ int ListDirectoryContents(const wchar_t *sDir, ULONGLONG* size, wchar_t** file_n
             wprintf(L"File: %s Size: %d\n", file_name[i] , fileSize);
             i++;
         }
-    } while (FindNextFile(hFind, &fdFile));
+    } while (FindNextFile(hFind, &fdFile) && i < 1000);
     FindClose(hFind);
     return 1;
 }
@@ -60,7 +60,7 @@ int CountofFiles(const wchar_t *sDir)
         {
             i++;
         }
-    } while (FindNextFile(hFind, &fdFile));
+    } while (FindNextFile(hFind, &fdFile) && i < 1000);
     FindClose(hFind);
     return i;
 }
@@ -232,13 +232,13 @@ void main()
     wchar_t* temp[N] = { NULL };
     char* a = (char*)malloc(sizeof(char) * MAX_LEN);
     wchar_t* ca = (wchar_t*)malloc(sizeof(wchar_t) * MAX_LEN);
-    printf("Введите путь\n");
-    fgets(a, MAX_LEN, stdin);
-    a[strlen(a) - 1] = '\0';
-    swprintf(ca, MAX_LEN, L"%hs", a);
-    n = CountofFiles(ca);
-    if (n == -1)
-        return 1;
+	do {
+		printf("Введите путь\n");
+		fgets(a, MAX_LEN, stdin);
+		a[strlen(a) - 1] = '\0';
+		swprintf(ca, MAX_LEN, L"%hs", a);
+		n = CountofFiles(ca);
+	} while (n == -1);
     size = (ULONGLONG*)malloc(sizeof(ULONGLONG*) * n);
     tmp = (ULONGLONG*)malloc(sizeof(ULONGLONG*) * n);
     ListDirectoryContents(ca, size, file_name, temp);
@@ -299,6 +299,7 @@ void main()
 			printf("Сортировка слиянием, время сортировки %lf", time);
             break;
         }
+		printf("Выберите метод сортировки:\n1: Выбором\n2: Вставками\n3: Пузырьком\n4: Быстрая\n5: Слиянием\n0: Выход\nНеобходимо ввести цифру\n");
         scanf("%d", &sort_num);
     }
 
