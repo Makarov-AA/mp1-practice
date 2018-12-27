@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <time.h>
 
 #define N 1000
 #define MAX_LEN 2048
@@ -219,9 +220,11 @@ void mergesort(ULONGLONG* a, ULONGLONG* buffer, wchar_t** f, wchar_t** temp, int
     mergesort(a, buffer, f, temp, m + 1, r);
     merge(a, buffer, f, temp, l, m, r);
 }
+
 void main()
 { 
     setlocale(LC_ALL, "Russian");
+	clock_t begin, end, time;
     int n, i, sort_num, check;
     ULONGLONG* tmp = NULL;
     ULONGLONG* size = NULL;
@@ -247,32 +250,53 @@ void main()
     printf("Выберите метод сортировки:\n1: Выбором\n2: Вставками\n3: Пузырьком\n4: Быстрая\n5: Слиянием\n0: Выход\n");
     scanf("%d", &sort_num);
     while (sort_num != 0) {
+
         switch (sort_num)
         {
         case 1:
+			begin = clock();
             choose(size, file_name, n);
+			end = clock();
+			time = (double)(end - begin) / CLOCKS_PER_SEC;
             for (i = 0; i < n; i++)
                 wprintf(L"File: %s Size: %d\n", file_name[i], size[i]);
+			printf("Сортировка выбором, время сортировки %lf", time);
             break;
         case 2:
+			begin = clock();
             insert(size, file_name, n);
+			end = clock();
+			time = (double)(end - begin) / CLOCKS_PER_SEC;
             for (i = 0; i < n; i++)
                 wprintf(L"File: %s Size: %d\n", file_name[i], size[i]);
+			printf("Сортировка вставками, время сортировки %lf", time);
             break;
         case 3:
+			begin = clock();
             bubble(size, file_name, n);
+			end = clock();
+			time = (double)(end - begin) / CLOCKS_PER_SEC;
             for (i = 0; i < n; i++)
                 wprintf(L"File: %s Size: %d\n", file_name[i], size[i]);
+			printf("Сортировка пузырьком, время сортировки %lf", time);
             break;
         case 4:
+			begin = clock();
             quicksort(size, file_name, 0, n);
+			end = clock();
+			time = (double)(end - begin) / CLOCKS_PER_SEC;
             for (i = 0; i < n; i++)
                 wprintf(L"File: %s Size: %d\n", file_name[i], size[i]);
+			printf("Быстрая сортировка, время сортировки %lf", time);
             break;
         case 5:
+			begin = clock();
             mergesort(size, tmp, file_name, temp, 0, n);
+			end = clock();
+			time = (double)(end - begin) / CLOCKS_PER_SEC;
             for (i = 0; i < n; i++)
                 wprintf(L"File: %s Size: %d\n", file_name[i], size[i]);
+			printf("Сортировка слиянием, время сортировки %lf", time);
             break;
         }
         scanf("%d", &sort_num);
