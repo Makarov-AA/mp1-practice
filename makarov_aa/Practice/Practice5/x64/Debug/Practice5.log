@@ -1,0 +1,34 @@
+﻿  Source.c
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(34): warning C4477: "wprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "ULONGLONG"
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(34): note: рекомендуется использовать "%lld" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(34): note: рекомендуется использовать "%Id" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(34): note: рекомендуется использовать "%I64d" в строке форматирования
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(73): warning C4244: =: преобразование "ULONGLONG" в "int", возможна потеря данных
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(78): warning C4244: =: преобразование "ULONGLONG" в "int", возможна потеря данных
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(83): warning C4047: =: "wchar_t **" отличается по уровням косвенного обращения от "wchar_t *"
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(85): warning C4047: =: "wchar_t *" отличается по уровням косвенного обращения от "wchar_t **"
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(154): warning C4244: функция: преобразование "ULONGLONG" в "int", возможна потеря данных
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(238): warning C4098: main: функция типа "void", возвращающая значение
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(255): warning C4477: "wprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "ULONGLONG"
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(255): note: рекомендуется использовать "%lld" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(255): note: рекомендуется использовать "%Id" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(255): note: рекомендуется использовать "%I64d" в строке форматирования
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(260): warning C4477: "wprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "ULONGLONG"
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(260): note: рекомендуется использовать "%lld" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(260): note: рекомендуется использовать "%Id" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(260): note: рекомендуется использовать "%I64d" в строке форматирования
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(265): warning C4477: "wprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "ULONGLONG"
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(265): note: рекомендуется использовать "%lld" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(265): note: рекомендуется использовать "%Id" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(265): note: рекомендуется использовать "%I64d" в строке форматирования
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(270): warning C4477: "wprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "ULONGLONG"
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(270): note: рекомендуется использовать "%lld" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(270): note: рекомендуется использовать "%Id" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(270): note: рекомендуется использовать "%I64d" в строке форматирования
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(275): warning C4477: "wprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "ULONGLONG"
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(275): note: рекомендуется использовать "%lld" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(275): note: рекомендуется использовать "%Id" в строке форматирования
+  d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(275): note: рекомендуется использовать "%I64d" в строке форматирования
+d:\учеба\mp1-practice\makarov_aa\practice\practice5\source.c(225): warning C4101: check: неиспользованная локальная переменная
+  Practice5.vcxproj -> D:\Учеба\mp1-practice\makarov_aa\Practice\x64\Debug\Practice5.exe
+  Practice5.vcxproj -> D:\Учеба\mp1-practice\makarov_aa\Practice\x64\Debug\Practice5.pdb (Partial PDB)
