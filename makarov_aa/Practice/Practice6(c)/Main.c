@@ -1,11 +1,6 @@
 ﻿#include <stdlib.h>
 #include <locale.h>
 #include <math.h>
-typedef struct
-{
-	unsigned int m_n;
-	double* m_x;
-} N_vector;
 #include "N_vector.h"
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -13,13 +8,15 @@ typedef struct
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	printf("Попытка создать нулевой вектор\n");
-	N_vector v = create(0);
+	//printf("Попытка создать нулевой вектор\n");
+	N_vector v;// = create(0);
 	N_vector v1, result;
 	double d;
 	printf("Создание вектора размерности 3 со значениями (4, 5, 3)\n");
 	v = create(3);
-	*(v.m_x = 4);
+	v.m_x[0] = 4;
+	v.m_x[1] = 5;
+	v.m_x[2] = 3;
 	print(&v);
 	printf("Создание вектора размерности 2 со значениями (1, 7)\n");
 	

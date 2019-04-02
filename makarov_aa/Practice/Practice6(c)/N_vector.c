@@ -1,10 +1,6 @@
 ﻿#include <stdio.h>
-
-typedef struct
-{
-	unsigned int m_n;
-	double* m_x;
-} N_vector;
+#include <stdlib.h>
+#include "N_vector.h"
 
 void read(N_vector* v)
 {
@@ -21,12 +17,11 @@ void read(N_vector* v)
 }
 N_vector create(unsigned int n)
 {
-	if (n == 0) 
-		printf("Error: incorrect vector size\n"); 
+	if (n == 0)
+		printf("Error: incorrect vector size\n");
 	N_vector v;
 	v.m_n = n;
 	v.m_x = (double*)malloc(sizeof(double) * n);
-	
 	return v;
 }
 N_vector copy(N_vector* v)

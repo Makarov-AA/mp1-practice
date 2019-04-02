@@ -1,5 +1,11 @@
 ﻿#pragma once
 
+typedef struct
+{
+	unsigned int m_n;
+	double *m_x;
+} N_vector;
+
 void read(N_vector* v);
 void print(N_vector* v);
 N_vector create(unsigned int); /*создание вектора размерности n*/
