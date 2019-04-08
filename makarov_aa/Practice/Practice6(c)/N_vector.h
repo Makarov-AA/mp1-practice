@@ -11,6 +11,7 @@ void print(N_vector* v);
 N_vector create(unsigned int); /*создание вектора размерности n*/
 N_vector copy(N_vector*); /*копирование вектора*/
 void delete(N_vector*); /*удаление вектора v*/ 
+N_vector zero();
 N_vector sum(N_vector*, N_vector*); /*Возвращает сумму векторов v1 и v2*/
 N_vector diff(N_vector*, N_vector*); /*Возвращает разность векторов v1 и v2*/
 double mlp(N_vector*, N_vector*); /* Возвращает скалярное произведение v1 и v2*/
