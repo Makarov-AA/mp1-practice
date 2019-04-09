@@ -17,18 +17,18 @@ public:
 	N_vector operator*(const double x) const;//умножение на константу
 	N_vector operator/(const double x) const;//деление на константу
 	N_vector& operator=(const N_vector &x);//присваивание
-	void operator+=(const N_vector x);//+= для векторов
-	void operator-=(const N_vector x);//-= для векторов
-	void operator*=(const N_vector x);//*= для векторов
-	void operator+=(const double x);//+= для константы
-	void operator-=(const double x);//-= для константы
-	void operator*=(const double x);//*= для константы
-	void operator/=(const double x);// /= для константы
-	int get_s();//геттер размера
+	N_vector operator+=(const N_vector x);//+= для векторов
+	N_vector operator-=(const N_vector x);//-= для векторов
+	N_vector operator*=(const N_vector x);//*= для векторов
+	N_vector operator+=(const double x);//+= для константы
+	N_vector operator-=(const double x);//-= для константы
+	N_vector operator*=(const double x);//*= для константы
+	N_vector operator/=(const double x);// /= для константы
+	int get_s() const;//геттер размера
 	double& operator[](int i) const;//получение i-ой координаты
-	double length();//длина
-	double angle(N_vector x);//угол между двумя векторами
-	double angle();//угол между вектором и осью координат
+	double length() const;//длина
+	double angle(N_vector x) const;//угол между двумя векторами
+	double angle() const;//угол между вектором и осью координат
 };
 
 
