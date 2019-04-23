@@ -6,12 +6,15 @@
 
 N_vector::N_vector(int a) : n_m(a)//конструктор по умолчанию
 {
+	if (a <= 0) throw "Error: incorrect vector size\n";
 	x_m = new double(a);
 }
 N_vector::N_vector(const N_vector &x)//конструктор копирования
 {
-	x_m = x.x_m;
 	n_m = x.n_m;
+	x_m = new double(n_m);
+	for (int i = 0; i < n_m; i++)
+		x_m[i] = x.x_m[i];
 }
 N_vector::~N_vector()//деструктор
 {
@@ -27,123 +30,137 @@ std::ostream& operator<<(std::ostream &out, const N_vector &x)//вывод
 }
 std::istream& operator >> (std::istream &in, const N_vector &x)//ввод
 {
-	in >> x.n_m;
 	for (int i = 0; i < x.n_m; i++)
 		in >> x.x_m[i];
 	return in;
 }
-N_vector N_vector::operator+(const N_vector x) const
+N_vector N_vector::operator+(const N_vector x) const //сложение векторов
 {
+	if (n_m != x.n_m) throw "Error: different sizes of vectors\n";
 	N_vector sum(n_m);
 	for (int i = 0; i < n_m; i++)
 		sum.x_m[i] = x_m [i] + x.x_m[i];
 	return sum;
 }
-N_vector N_vector::operator-(const N_vector x) const
+N_vector N_vector::operator-(const N_vector x) const //вычитание векторов
 {
+	if (n_m != x.n_m) throw "Error: different sizes of vectors\n";
 	N_vector dif(n_m);
 	for (int i = 0; i < n_m; i++)
 		dif.x_m[i] = x_m[i] - x.x_m[i];
 	return dif;
 }
-N_vector N_vector::operator*(const N_vector x) const
+double N_vector::operator*(const N_vector x) const//скалярное произведение векторов
 {
-	N_vector mlp(n_m);
+	if (n_m != x.n_m) throw "Error: different sizes of vectors\n";
+	double mlp(n_m);
 	for (int i = 0; i < n_m; i++)
 		mlp.x_m[i] = x_m[i] * x.x_m[i];
 	return mlp;
 }
-N_vector N_vector::operator+(const double x) const
+N_vector N_vector::operator+(const double x) const // прибавление константы
 {
 	N_vector sum(n_m);
 	for (int i = 0; i < n_m; i++)
 		sum.x_m[i] = x_m[i] + x;
 	return sum;
 }
-N_vector N_vector::operator-(const double x) const
+N_vector N_vector::operator-(const double x) const // вычитание константы
 {
 	N_vector dif(n_m);
 	for (int i = 0; i < n_m; i++)
 		dif.x_m[i] = x_m[i] - x;
 	return dif;
 }
-N_vector N_vector::operator*(const double x) const
+N_vector N_vector::operator*(const double x) const // умножение на константу
 {
 	N_vector mlp(n_m);
 	for (int i = 0; i < n_m; i++)
 		mlp.x_m[i] = x_m[i] * x;
 	return mlp;
 }
-N_vector N_vector::operator/(const double x) const
+N_vector N_vector::operator/(const double x) const // деление на константу
 {
+	if (x == 0) throw "Error: 0 division is impossible\n";
 	N_vector div(n_m);
 	for (int i = 0; i < n_m; i++)
 		div.x_m[i] = x_m[i] / x;
 	return div;
 }
-N_vector& N_vector::operator=(const N_vector &x)
+N_vector& N_vector::operator=(const N_vector &x) // присваивание
 {
+	if (n_m != x.n_m)
+	{
+		delete x_m;
+		x_m = new double(x.n_m);
+	}
 	n_m = x.n_m;
 	for (int i = 0; i < n_m; i++)
 		x_m[i] = x.x_m[i];
 	return (*this);
 }
-N_vector N_vector::operator+=(const N_vector x)
+N_vector N_vector::operator+=(const N_vector x) // += для векторов
 {
+	if (n_m != x.n_m) throw "Error: different sizes of vectors\n";
 	for (int i = 0; i < n_m; i++)
 		x_m[i] += x.x_m[i];
 	return (*this);
 }
-N_vector N_vector::operator-=(const N_vector x)
+N_vector N_vector::operator-=(const N_vector x) // -= для векторов
 {
+	if (n_m != x.n_m) throw "Error: different sizes of vectors\n";
 	for (int i = 0; i < n_m; i++)
 		x_m[i] -= x.x_m[i];
 	return (*this);
 }
-N_vector N_vector::operator*=(const N_vector x)
+//N_vector N_vector::operator*=(const N_vector x)
 {
+	if (n_m != x.n_m) throw "Error: different sizes of vectors\n";
 	for (int i = 0; i < n_m; i++)
 		x_m[i] *= x.x_m[i];
 	return (*this);
 }
-N_vector N_vector::operator+=(const double x)
+N_vector N_vector::operator+=(const double x)//+= для констант
 {
 	for (int i = 0; i < n_m; i++)
 		x_m[i] += x;
 	return (*this);
 }
-N_vector N_vector::operator-=(const double x)
+N_vector N_vector::operator-=(const double x)// -= для констант
 {
 	for (int i = 0; i < n_m; i++)
 		x_m[i] -= x;
 	return (*this);
 }
-N_vector N_vector::operator*=(const double x)
+N_vector N_vector::operator*=(const double x)// *= для констант
 {
 	for (int i = 0; i < n_m; i++)
 		x_m[i] *= x;
 	return (*this);
 }
-N_vector N_vector::operator/=(const double x)
+N_vector N_vector::operator/=(const double x)// /= для констант
 {
+	if (x == 0) throw "Error: 0 division is impossible\n";
 	for (int i = 0; i < n_m; i++)
 		x_m[i] /= x;
 	return (*this);
 }
-int N_vector::get_s() const { return n_m; }
-double& N_vector::operator[](int i) const
+int N_vector::get_s() const { return n_m; }// геттер для для размерности
+double& N_vector::operator[](int i) const //получение ссылки на i-ую координату
 {
+	if (i > n_m - 1) throw "Error: out of dimension\n";
 	return x_m[i];
 }
-double N_vector::length() const
+double N_vector::length() const//длина
 {
 	double l(0);
 	for (int i = 0; i < n_m; i++)
 		l += x_m[i] * x_m[i];
 	return sqrt(l);
 }
-double angle(N_vector x) const
+double N_vector::angle(N_vector x) const//угол между двумя векторами
 {
 	double a;
-	a 
+	a = x * (*this) / length() / x.length();
+	return a;
 }
