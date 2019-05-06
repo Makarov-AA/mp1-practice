@@ -19,16 +19,15 @@ public:
 	N_vector& operator=(const N_vector &x);//присваивание
 	N_vector operator+=(const N_vector x);//+= для векторов
 	N_vector operator-=(const N_vector x);//-= для векторов
-	//N_vector operator*=(const N_vector x);//*= для векторов
 	N_vector operator+=(const double x);//+= для константы
 	N_vector operator-=(const double x);//-= для константы
 	N_vector operator*=(const double x);//*= для константы
 	N_vector operator/=(const double x);// /= для константы
-	int get_s() const;//геттер размера
+	int get_size() const;//геттер размера
 	double& operator[](int i) const;//получение ссылки на i-ую координату
 	double length() const;//длина
 	double angle(N_vector x) const;//угол между двумя векторами
-	double angle() const;//угол между вектором и осью координат
 };
+
 
 

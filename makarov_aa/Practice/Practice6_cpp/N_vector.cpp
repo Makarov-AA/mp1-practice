@@ -7,25 +7,24 @@
 N_vector::N_vector(int a) : n_m(a)//конструктор по умолчанию
 {
 	if (a <= 0) throw "Error: incorrect vector size\n";
-	x_m = new double(a);
+	x_m = new double [a];
 }
 N_vector::N_vector(const N_vector &x)//конструктор копирования
 {
 	n_m = x.n_m;
-	x_m = new double(n_m);
+	x_m = new double[n_m];
 	for (int i = 0; i < n_m; i++)
 		x_m[i] = x.x_m[i];
 }
 N_vector::~N_vector()//деструктор
 {
-	delete x_m;
+	delete[] x_m;
 }
 std::ostream& operator<<(std::ostream &out, const N_vector &x)//вывод
 {
 	out << x.x_m[0];
 	for (int i = 1; i < x.n_m; i++)
 		out << "  " << x.x_m[i];
-	out << "\n" << "Size " << x.n_m << "\n";
 	return out;
 }
 std::istream& operator >> (std::istream &in, const N_vector &x)//ввод
@@ -53,9 +52,9 @@ N_vector N_vector::operator-(const N_vector x) const //вычитание векторов
 double N_vector::operator*(const N_vector x) const//скалярное произведение векторов
 {
 	if (n_m != x.n_m) throw "Error: different sizes of vectors\n";
-	double mlp(n_m);
+	double mlp(0);
 	for (int i = 0; i < n_m; i++)
-		mlp.x_m[i] = x_m[i] * x.x_m[i];
+		mlp+= x_m[i] * x.x_m[i];
 	return mlp;
 }
 N_vector N_vector::operator+(const double x) const // прибавление константы
@@ -91,8 +90,8 @@ N_vector& N_vector::operator=(const N_vector &x) // присваивание
 {
 	if (n_m != x.n_m)
 	{
-		delete x_m;
-		x_m = new double(x.n_m);
+		delete[] x_m;
+		x_m = new double[x.n_m];
 	}
 	n_m = x.n_m;
 	for (int i = 0; i < n_m; i++)
@@ -111,13 +110,6 @@ N_vector N_vector::operator-=(const N_vector x) // -= для векторов
 	if (n_m != x.n_m) throw "Error: different sizes of vectors\n";
 	for (int i = 0; i < n_m; i++)
 		x_m[i] -= x.x_m[i];
-	return (*this);
-}
-//N_vector N_vector::operator*=(const N_vector x)
-{
-	if (n_m != x.n_m) throw "Error: different sizes of vectors\n";
-	for (int i = 0; i < n_m; i++)
-		x_m[i] *= x.x_m[i];
 	return (*this);
 }
 N_vector N_vector::operator+=(const double x)//+= для констант
@@ -145,7 +137,7 @@ N_vector N_vector::operator/=(const double x)// /= для констант
 		x_m[i] /= x;
 	return (*this);
 }
-int N_vector::get_s() const { return n_m; }// геттер для для размерности
+int N_vector::get_size() const { return n_m; }// геттер для для размерности
 double& N_vector::operator[](int i) const //получение ссылки на i-ую координату
 {
 	if (i > n_m - 1) throw "Error: out of dimension\n";
