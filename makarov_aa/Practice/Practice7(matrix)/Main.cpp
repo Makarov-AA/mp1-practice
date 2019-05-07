@@ -7,11 +7,10 @@
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	std::cout << "Попытка создать нулевой вектор\n";
-	try { Matrix a(0); }
-	catch (char* er) { std::cout << er; }
-	std::cout << "Создание вектора а по умолчанию (3ей размерности)\n";
-	Matrix a;
+	std::cout << "Создание а и b 3х3\n";
+	Matrix a, b;
+	std::cout << "Матрица а:\n";
+	std::cout << a;
 	std::cout << "Ввод\n";
 	std::cin >> a;
 	/*a[0] = 5;
@@ -57,8 +56,6 @@ int main()
 	std::cout << "a * c = ";
 	try { std::cout << a * c << std::endl; }
 	catch (char* er) { std::cout << er; }
-	std::cout << "Угол между а и c \n";
-	try { std::cout << a.angle(c) << std::endl; }
 	catch (char* er) { std::cout << er; }
 	return 0;
 }
