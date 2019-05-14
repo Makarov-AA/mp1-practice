@@ -28,6 +28,4 @@ public:
 	Matrix operator*=(const double x);//*= для константы
 	Matrix operator/=(const double x);// /= для константы
 	double* operator[](int i) const;//получение ссылки на i-ую строку
-	Matrix invert() const;
-	Matrix transp() const;
 };

@@ -188,35 +188,3 @@ void Matrix::dif(int k, double a, int m, double b)
 		x_m[k * m_m + i] -= x_m[m * m_m + i] * b;
 	}
 }
-Matrix Matrix::invert() const
-{
-	if (n_m != m_m) throw "Error: matrix should be square\n";
-	Matrix inv(n_m, m_m), tmp(*this);
-	for (int i = 0; i < n_m; i++)
-		for (int j = 0; j < n_m; j++)
-			inv[i][j] = 0;
-	for (int i = 0; i < n_m; i++)
-		inv[i][i] = 1;
-	for (int j = 0; j < m_m; j++)
-		for (int i = j + 1; i < n_m; i++)
-		{
-			inv.dif(i, tmp[j][j], j, tmp[i][j]);
-			tmp.dif(i, tmp[j][j], j, tmp[i][j]);
-		}
-	for (int j = n_m - 1; j > -1; j--)
-	{
-		for (int i = 0; i > m_m; i++)
-			inv[j][i] /= tmp[j][j];
-		for (int k = j - 1; k > -1; k--)
-			inv.dif(k, 1, j, tmp[j - 1][j]);
-	}
-	return inv;
-}
-Matrix Matrix::transp() const
-{
-	Matrix tr(m_m, n_m);
-	for (int j = 0; j < m_m; j++)
-		for (int i = 0; i < n_m; i++)
-			tr[j][i] = (*this)[i][j];
-	return tr;
-}
