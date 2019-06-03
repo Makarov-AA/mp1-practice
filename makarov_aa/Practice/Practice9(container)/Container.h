@@ -24,7 +24,7 @@ public:
     void add(const T&);//добавление элемента с правого края
     void add(const T&, int);//добавление элемента перед заданным номером
     int search(const T&);//поиск элемента, если не обнаруживает, возвращает -1
-    virtual void print();
+    void print();
     friend std::ostream& operator << (std::ostream&, const Container&);//печать контейнера через оператор <<
     void input();
     //friend std::istream& operator >> (std::istream&, Container&);//ввод всего массива через >>
@@ -86,22 +86,21 @@ T& Container<T>::operator [] (int i)
     return x[i];
 }
 
-int min(int a, int b)
-{
-    return a < b ? a : b;
-}
-
 template <class T>
 void Container<T>::resize(int n)
 {
-    if (n < 1) throw "Неверный размер контейнера";
-    T* tmp = new T[n];
-    int k = min(size, n);
-    for (int i = 0; i < k; i++)
-        tmp[i] = x[i];
-    delete x;
-    x = tmp;
-    size = n;
+    if (n < 0) throw "Неверный размер контейнера";
+	if (n == 0) clear();
+	else
+	{
+		T* tmp = new T[n];
+		int k = size < n ? size : n;
+		for (int i = 0; i < k; i++)
+			tmp[i] = x[i];
+		delete[] x;
+		x = tmp;
+		size = n;
+	}
 }
 
 template <class T>
