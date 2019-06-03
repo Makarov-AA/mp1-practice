@@ -2,8 +2,8 @@
 
 typedef struct
 {
-	unsigned int m_n;
-	double *m_x;
+    unsigned int m_n;
+    double *m_x;
 } N_vector;
 
 void read(N_vector* v);

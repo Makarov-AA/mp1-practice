@@ -6,21 +6,32 @@
 
 int main()
 {
-	setlocale(LC_ALL, "Russian");
-	std::cout << "Создание а и b 3х3\n";
-	Matrix a, b;
-	std::cout << "Матрица а:\n";
-	a[0][0] = 5; a[0][1] = -3; a[0][2] = 3;
-	a[1][0] = 7; a[1][1] = 4; a[1][2] = 7;
-	a[2][0] = 13; a[2][1] = -1; a[2][2] = 8;
-	std::cout << a;
-	std::cout << "Матрица b\n";
-	b[0][0] = 5; b[0][1] = 1; b[0][2] = -9;
-	b[1][0] = 3; b[1][1] = -15; b[1][2] = 4;
-	b[2][0] = 8; b[2][1] = 2; b[2][2] = 14;
-	std::cout << b;
-	std::cout << "a + b" << a + b;
-	std::cout << "a - b" << a - b;
-	std::cout << "a * b" << a * b;
-	return 0;
+    setlocale(LC_ALL, "Russian");
+    std::cout << "Создание а и b 3х3\n";
+    Matrix a, b;
+    std::cout << "Ввод а\n";
+    std::cin >> a;
+    std::cout << "Ввод b\n";
+    std::cin >> b;
+    std::cout << "Матрица а:\n";
+    std::cout << a;
+    std::cout << "Матрица b:\n";
+    std::cout << b;
+    std::cout << "Операции с константой 5\n";
+    try { std::cout << a + 5 << a - 5 << a * 5 << a / 5; }
+    catch (char* er) { std::cout << er; }
+    std::cout << "Попытка деления на 0\n";
+    try { std::cout << a / 0; }
+    catch (char* er) { std::cout << er; }
+    std::cout << "Выполнение всех операций между а и b  \n";
+    std::cout << "a + b = ";
+    try { std::cout << a + b; }
+    catch (char* er) { std::cout << er; }
+    std::cout << "a - b = ";
+    try { std::cout << a - b; }
+    catch (char* er) { std::cout << er; }
+    std::cout << "a * b = ";
+    try { std::cout << a * b; }
+    catch (char* er) { std::cout << er; }
+    return 0;
 }
